@@ -1,0 +1,25 @@
+{%extends 'base.html'%}
+{% block content %}
+<div class="container">
+
+ <div class="row">
+   {% if profiles %}
+     <h2> {{message}}</h2> 
+   {% else %}
+     <h2> Didn't find anything with that name </h2>
+   {% endif %}
+
+ </div>
+
+ <div class="row">
+
+ {% if posts %}
+   {% for profile in profiles %}
+     <div class="col-sm-6 col-md-3">
+         <h1>{{image.caption}}</h1>
+     </div>
+   {% endfor %}
+ {% endif %}
+ </div>
+</div>
+{% endblock %}
