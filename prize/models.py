@@ -40,4 +40,15 @@ class Comments(models.Model):
     image = models.ForeignKey(Image, related_name = "comments")
 
 
+    def save_comment(self):
+        self.save()
+
+    def delete_comment(self):
+        Comments.objects.get(id = self.id).delete()
+    
+    def update_comment(self,new_comment):
+        comm = Comments.objects.get(id = self.id)
+        comm.comment = new_comment
+        comm.save()
+
 
