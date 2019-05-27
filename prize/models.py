@@ -34,3 +34,10 @@ class Projects(models.Model):
 
    def __str__(self):
        return self.title
+
+class Comments(models.Model):
+    comm = models.CharField(max_length = 100, blank = True)
+    image = models.ForeignKey(Image, related_name = "comments")
+
+
+
