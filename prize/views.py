@@ -71,13 +71,13 @@ def search_results(request):
         message = "Invalid input"
         return render(request,'search.html',{"message":message})
 
-class Projects(APIView):
+class ProjectsList(APIView):
     def get(self, request, format=None):
         all_merch = Projects.objects.all()
         serializers = Projects(all_merch, many=True)
         return Response(serializers.data)
 
-class Profile(APIView):
+class ProfileList(APIView):
     def get(self, request, format=None):
         all_merch = Profile.objects.all()
         serializers = Profile(all_merch, many=True)
