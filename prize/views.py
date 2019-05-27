@@ -5,6 +5,10 @@ import datetime as dt
 from .models import *
 from django.contrib.auth.models import User
 from . forms import UserUploadProjects
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .models import  Projects,Profile
+from .serializer import MerchSerializer
 
 @login_required(login_url='/accounts/login/')
 def home(request):
@@ -67,5 +71,9 @@ def search_results(request):
         message = "Invalid input"
         return render(request,'search.html',{"message":message})
 
-
+class Projects(APIView):
+    def get(self, request, format=None):
+        all_merch = Projects.objects.all()
+        serializers = Projects(all_merch, many=True)
+        return Response(serializers.data)
 
