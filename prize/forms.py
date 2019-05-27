@@ -6,4 +6,4 @@ class UserUploadProjects(forms.ModelForm):
 
     class Meta:
         model=Projects
-        fields=['project','project']
+        fields=['title','image_landing','description','link']

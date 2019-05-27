@@ -3,7 +3,7 @@ from django.http import HttpResponse,Http404
 from django.contrib.auth.decorators import login_required
 import datetime as dt 
 from .models import *
-from . forms import UserUploadImage
+from . forms import UserUploadProjects
 
 @login_required(login_url='/accounts/login/')
 def home(request):
@@ -59,6 +59,17 @@ def profile(request,username):
 
     return render(request, 'user/profile.html', {"profile":profile,"profile_details": profile_details,"projects":projects})
 
+
+def search_results(request):
+    if 'profile' in request.GET and request.GET["profile"]:
+        search_term = request.GET.get("profile")
+        searched_profile = Projects.search_by_profile(search_term)
+        message = f"{search_term}"
+        return render(request,'search.html',{"message":message,"profile":searched_profile})
+
+    else:
+        message = "Invalid input"
+        return render(request,'search.html',{"message":message})
 
 
 
