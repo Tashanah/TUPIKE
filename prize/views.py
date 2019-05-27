@@ -77,3 +77,9 @@ class Projects(APIView):
         serializers = Projects(all_merch, many=True)
         return Response(serializers.data)
 
+class Profile(APIView):
+    def get(self, request, format=None):
+        all_merch = Profile.objects.all()
+        serializers = Profile(all_merch, many=True)
+        return Response(serializers.data)
+
