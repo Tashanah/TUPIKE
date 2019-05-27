@@ -8,7 +8,8 @@ from . forms import UserUploadProjects
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import  Projects,Profile
-from .serializer import MerchSerializer
+from .serializer import ProjectsSerializer,ProfileSerializer
+from rest_framework import status
 
 @login_required(login_url='/accounts/login/')
 def home(request):
@@ -73,13 +74,20 @@ def search_results(request):
 
 class ProjectsList(APIView):
     def get(self, request, format=None):
-        all_merch = Projects.objects.all()
-        serializers = Projects(all_merch, many=True)
+        all_projects = Projects.objects.all()
+        serializers = ProjectsSerializer(all_projects, many=True)
         return Response(serializers.data)
+
+    def post(self, request, format=None):
+        serializers =ProjectsSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class ProfileList(APIView):
     def get(self, request, format=None):
-        all_merch = Profile.objects.all()
-        serializers = Profile(all_merch, many=True)
+        all_profile = Profile.objects.all()
+        serializers = ProfileSerializer(all_profile, many=True)
         return Response(serializers.data)
 
