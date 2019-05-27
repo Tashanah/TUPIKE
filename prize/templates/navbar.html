@@ -1,104 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-
-<body>
-    <nav class="navbar navbar-inverse" style=" background-color:rgba(248, 248, 255, 0.76)">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="{% url 'home' %}">
-                    <img src="https://i2.wp.com/www.sleepapnea.org/wp-content/uploads/2017/04/instagram-logo.png?ssl=1"
-                        alt="profile-photo" width="150" height="45">
-
-            </div>
-            <div class="nav-search">
-                <form class="form-inline md-form form-md active-pink active-pink-2 mt-2"
-                    action="{% url 'search_results' %}">
-                    <i class="fas fa-search" aria-hidden="true"></i>
-                    <input class="form-control form-control-md ml-3 w-75" type="text" placeholder="Search"
-                        aria-label="Search" name="users">
+<style>
+    #brand{
+        color:black;
+        border:2px solid  #1565C0;
+        padding: 10px;
+        border-bottom: none;
+        font-size:18px;
+    }
+    #brand:hover{
+        border-bottom:2px solid  #1565C0;
+        color:#64B5F6;
+    }
+    .accounts{
+        padding: 10px;
+        letter-spacing: 1.5px;
+        color:black;
+        font-weight: 700
+    }
+    .accounts:hover{
+        text-decoration:underline;
+    }
+    #projects{
+        padding:20px;
+        background:#4DD0E1;
+        top:0;
+        color: white;
+        font-weight: bold;
+    }
+    #projects:hover{
+      background:#81D4FA;
+    }
+    
+    
+    </style>
+    <nav style="background-color:white;" class="animated slideInDown navbar-collapse">
+            <div class="navbar mx-5">
+              <div id="logo" >
+                <a href="{% url 'home' %}" id="brand"> AWWARDS</a>
+        
+              </div>
+              <div class="nav-search">
+                <form class="form-inline md-form form-md active-pink active-pink-2 mt-2" action="">
+                  <i class="fas fa-search" aria-hidden="true"></i>
+                  <input class="form-control form-control-md ml-3 w-75" type="text" placeholder="Search" aria-label="Search"
+                    name="users">
                 </form>
-            </div>
-
-
-            <div class="col-sm-4 col-md-4 navbar-left">
+              </div>
+              <div class="nav-right">
                 {% if user.is_authenticated %}
-                <ul>
-
-
-
-                    
-                        <a href="{%url 'home'%}"
-                            style="font-family: 'Rajdhani', sans-serif; color: black; font-size: 25px"><i
-                                class="fas fa-home"></i> </a>
-
-                        <!-- <a href="/accounts/register"
-                            style="font-family: 'Rajdhani', sans-serif; color: black; font-size: 25px"><i
-                                class="fas fa-user-plus"></i></a> -->
-
-                        <!-- <a href="/logout" style="font-family: 'Rajdhani', sans-serif; color: black; font-size: 25px"><i
-                                class="fas fa-sign-out-alt"></i></a> -->
-
-                        <a href="{% url 'profile' username=user%}" style="font-family: 'Rajdhani', sans-serif; color: black; font-size: 25px" alt="profile">
-                            <i class="fas fa-user"></i></a>
-                                
-
-
-
-                </ul>
-                </li>
-                </ul>
+                <a href="/logout">Logout</a>
                 {% else %}
-                <li>
-                    <a class='btn btn-default' href="/accounts/login">Login</a>
-                </li>
-                <div class="col-sm-6 col-md-6">
-                    {% if user.is_authenticated %}
-                    <ul>
-                        <li>
-                            <a href="#" role="button" aria-expanded="false">Account
-                                <span class="caret"></span>
-                            </a>
-                            <!-- <ul class="dropdown-menu" role="menu"> -->
-
-                            <a href="{%url 'home'%}">Home</a>
-
-                            <a href="/accounts/register">SignUp</a>
-
-                            <a href="/logout">Logout</a>
-                            <a class='btn btn-default' href="/accounts/login">Login</a>
-
-
-                </div>
-                </li>
-                </ul>
-                </li>
-                <div class="col-sm-6 col-md-6">
-                    {% if user.is_authenticated %}
-                    <ul>
-                        {% else %}
-                        <li>
-                            {% endif %}
-                </div>
-                </ul>
-                {% else %}
-                <li>
-                    <a class='btn btn-default' href="/accounts/login">Login</a>
-                </li>
-
-                {% endif %}
+                <a href="/accounts/register">SignUp</a>
+                
+                <a class='btn btn-default' href="/accounts/login">Login</a>
+                
+                {%  endif %}
+                <a href="{% url 'profile' username=user %}" class="avatar">
+                  <img class="rounded-circle" alt="" src="{{user.profile.profile_photo.url}}" height="60" width="45" />
+                </a>
+                <a href="{% url 'post_project' %}" id="projects">SUBMIT PROJECT</a> 
+                
+                
+              </div>
             </div>
-
-            {% endif %}
-        </div>
-
-        </div>
-    </nav>
-</body>
-
-</html>
+          </nav>

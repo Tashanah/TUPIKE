@@ -3,6 +3,7 @@ from django.http import HttpResponse,Http404
 from django.contrib.auth.decorators import login_required
 import datetime as dt 
 from .models import *
+from django.contrib.auth.models import User
 from . forms import UserUploadProjects
 
 @login_required(login_url='/accounts/login/')
@@ -19,7 +20,7 @@ def home(request):
 def post_project(request):
     current_user = request.user
     if request.method == 'POST':
-        upload_form = UserUploadProject(request.POST, request.FILES)
+        upload_form = UserUploadProjects(request.POST, request.FILES)
         if upload_form.is_valid():
             home = upload_form.save(commit=False)
             home.profile =current_user
@@ -45,19 +46,14 @@ def comment(request):
 def profile(request,username):
     profile=User.objects.get(username=username)
 
-    profiles=Profile.objects.all()
-    context = {
-        "profiles":profiles,
-    }
-
     try:
         profile_details = Profile.get_by_id(profile.id)
     except:
         profile_details = Profile.filter_by_id(profile.id)
     
-    projects = Project.get_profile_projects(profile.id)
+    projects = Projects.get_profile_projects(profile.id)
 
-    return render(request, 'user/profile.html', {"profile":profile,"profile_details": profile_details,"projects":projects})
+    return render(request, 'user/profile.html', {"profile":profile,"profile_details": profile_details})
 
 
 def search_results(request):
