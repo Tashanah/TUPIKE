@@ -42,5 +42,23 @@ def comment(request):
     data = {"user": user, "comment": comment}
     return JsonResponse(data)
 
+def profile(request,username):
+    profile=User.objects.get(username=username)
+
+    profiles=Profile.objects.all()
+    context = {
+        "profiles":profiles,
+    }
+
+    try:
+        profile_details = Profile.get_by_id(profile.id)
+    except:
+        profile_details = Profile.filter_by_id(profile.id)
+    
+    projects = Project.get_profile_projects(profile.id)
+
+    return render(request, 'user/profile.html', {"profile":profile,"profile_details": profile_details,"projects":projects})
+
+
 
 
