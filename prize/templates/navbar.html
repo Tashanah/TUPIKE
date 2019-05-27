@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse" style=" background-color:rgba(248, 248, 255, 0.76)">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{% url 'home' %}">
+                    <img src="https://i2.wp.com/www.sleepapnea.org/wp-content/uploads/2017/04/instagram-logo.png?ssl=1"
+                        alt="profile-photo" width="150" height="45">
+
+            </div>
+            <div class="nav-search">
+                <form class="form-inline md-form form-md active-pink active-pink-2 mt-2"
+                    action="{% url 'search_results' %}">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <input class="form-control form-control-md ml-3 w-75" type="text" placeholder="Search"
+                        aria-label="Search" name="users">
+                </form>
+            </div>
+
+
+            <div class="col-sm-4 col-md-4 navbar-left">
+                {% if user.is_authenticated %}
+                <ul>
+
+
+
+                    
+                        <a href="{%url 'home'%}"
+                            style="font-family: 'Rajdhani', sans-serif; color: black; font-size: 25px"><i
+                                class="fas fa-home"></i> </a>
+
+                        <!-- <a href="/accounts/register"
+                            style="font-family: 'Rajdhani', sans-serif; color: black; font-size: 25px"><i
+                                class="fas fa-user-plus"></i></a> -->
+
+                        <!-- <a href="/logout" style="font-family: 'Rajdhani', sans-serif; color: black; font-size: 25px"><i
+                                class="fas fa-sign-out-alt"></i></a> -->
+
+                        <a href="{% url 'profile' username=user%}" style="font-family: 'Rajdhani', sans-serif; color: black; font-size: 25px" alt="profile">
+                            <i class="fas fa-user"></i></a>
+                                
+
+
+
+                </ul>
+                </li>
+                </ul>
+                {% else %}
+                <li>
+                    <a class='btn btn-default' href="/accounts/login">Login</a>
+                </li>
+                <div class="col-sm-6 col-md-6">
+                    {% if user.is_authenticated %}
+                    <ul>
+                        <li>
+                            <a href="#" role="button" aria-expanded="false">Account
+                                <span class="caret"></span>
+                            </a>
+                            <!-- <ul class="dropdown-menu" role="menu"> -->
+
+                            <a href="{%url 'home'%}">Home</a>
+
+                            <a href="/accounts/register">SignUp</a>
+
+                            <a href="/logout">Logout</a>
+                            <a class='btn btn-default' href="/accounts/login">Login</a>
+
+
+                </div>
+                </li>
+                </ul>
+                </li>
+                <div class="col-sm-6 col-md-6">
+                    {% if user.is_authenticated %}
+                    <ul>
+                        {% else %}
+                        <li>
+                            {% endif %}
+                </div>
+                </ul>
+                {% else %}
+                <li>
+                    <a class='btn btn-default' href="/accounts/login">Login</a>
+                </li>
+
+                {% endif %}
+            </div>
+
+            {% endif %}
+        </div>
+
+        </div>
+    </nav>
+</body>
+
+</html>
