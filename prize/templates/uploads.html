@@ -10,7 +10,7 @@
                 <h1 class=" card-header text-center pink-text" style="font-family: 'Lobster Two', cursive;">
                     Upload Images</h1> <br>
                 <br>
-                <form action="{% url 'post_image' % }" method="POST" style="color:#757575;" enctype="multipart/form-data">
+                <form action="{% url 'post_projects' % }" method="POST" style="color:#757575;" enctype="multipart/form-data">
                         {% csrf_token %}
                         {% bootstrap_form upload_form %}
         

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block content %}
+{{block.super}}
+
+<div class="container">
+        <div class="row">
+            {%  for image in images %}
+            
+            <div style="margin-left: 25%; margin-right: 25%;">
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="font-family: 'Rajdhani', sans-serif;font-size: 20px"><a href=" {% url 'profile' username=image.profile.username %} ">{{image.profile}}</a></div> 
+                    <div class="panel-body">
+                    <div class="panel-img-top" data-toggle="modal" data-target="#myModal{{image.id}}" height="100px" width="250px"  >
+                        <img src="{{projects.image_landing.url}}"alt="" height="400px" width="450px">
+                    </div>
+                    <div class="panel-footer">
+                        <p style="font-family: 'Rajdhani', sans-serif; color: black; font-size: 25px" >{{image.caption}}</p>
+                        {% for comment in comments %}
+
+                        {{comment.user.username}}: {{comment.comm}}</p>
+              {% endfor %} 
+              
+              <input type="text" name="comment" id="" class="form-control comment-val" style="height: 30px;border-top-right-radius: 0; border-bottom-right-radius: 0"
+                required placeholder="Add a comment...">
+
+                <button type="submit" class="btn btn-sm btn-primary comment-btn" onclick="commenter('{{image.id}}')"
+                style="height: 30px; border-top-left-radius: 0; border-bottom-left-radius: 0">Add</button>
+                
+                    </div>
+                    
+
+                </div>
+                </div>
+            </div>
+            {% endfor %}
+
+    {% for image in images %}        
+            <div id="myModal{{image.id}}" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <!-- <h4 class="modal-title">{{image.profile}}</h4> -->
+                            <a href=" {% url 'profile' username=image.profile.username %} " style="font-family: 'Rajdhani', sans-serif;font-size: 20px">{{image.profile}}</a>
+                        </div>
+                        <div class="modal-body">
+                            <img src="{{image.image.url}}" class="img-responsive" alt="Image"> 
+                        </div>
+                        <div class="modal-footer">
+                            <p data-dismiss="modal" style="font-family: 'Rajdhani', sans-serif; color: black; font-size: 25px">{{image.caption}}</p>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>    
+    
+    {% empty %}
+    
+    <div class="row">
+        <h2 class="text-center">There are no images</h2>
+    </div>
+</div>
+    {% endfor %}
+</div>
+</div>
+{% endblock %}

@@ -8,7 +8,7 @@ from . forms import UserUploadProjects
 @login_required(login_url='/accounts/login/')
 def home(request):
 
-    projects=Project.objects.all()
+    projects=Projects.objects.all()
     context = {
         "projects":projects,
     }
@@ -26,7 +26,7 @@ def post_project(request):
             upload_form.save()
         return redirect('home')
     else:
-        upload_form = UserUploadProject()
+        upload_form = UserUploadProjects()
             
     return render(request,'uploads.html',{"upload_form":upload_form,})
 
