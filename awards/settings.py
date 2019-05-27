@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'url_or_relative_url_field',
     'bootstrap3',
     'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -73,6 +74,14 @@ TEMPLATES = [
         },
     },
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}
+
+
 
 WSGI_APPLICATION = 'awards.wsgi.application'
 

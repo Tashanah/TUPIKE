@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views
+from rest_framework.authtoken.views import obtain_auth_token
 
 
 urlpatterns = [
@@ -25,5 +26,6 @@ urlpatterns = [
     url(r'',include('prize.urls')),
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^logout/$', views.logout, {"next_page": '/'}),
+    url(r'^api-token-auth/', obtain_auth_token)
 ]
 
