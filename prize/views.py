@@ -29,3 +29,18 @@ def post_project(request):
         upload_form = UserUploadProject()
             
     return render(request,'uploads.html',{"upload_form":upload_form,})
+
+def comment(request):
+    project_id = request.POST.get("id")
+    project = Project.objects.get(pk=project_id)
+    Comments.objects.create(user=request.user, project=project,
+                            comm=request.POST.get("comment"))
+
+    user = request.user.username
+    comment = request.POST.get("comment")
+
+    data = {"user": user, "comment": comment}
+    return JsonResponse(data)
+
+
+
