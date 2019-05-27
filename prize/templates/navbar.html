@@ -1,65 +1,70 @@
 <style>
-    #brand{
-        color:black;
-        border:2px solid  #1565C0;
-        padding: 10px;
-        border-bottom: none;
-        font-size:18px;
-    }
-    #brand:hover{
-        border-bottom:2px solid  #1565C0;
-        color:#64B5F6;
-    }
-    .accounts{
-        padding: 10px;
-        letter-spacing: 1.5px;
-        color:black;
-        font-weight: 700
-    }
-    .accounts:hover{
-        text-decoration:underline;
-    }
-    #projects{
-        padding:20px;
-        background:#4DD0E1;
-        top:0;
-        color: white;
-        font-weight: bold;
-    }
-    #projects:hover{
-      background:#81D4FA;
-    }
-    
-    
-    </style>
-    <nav style="background-color:white;" class="animated slideInDown navbar-collapse">
-            <div class="navbar mx-5">
-              <div id="logo" >
-                <a href="{% url 'home' %}" id="brand"> AWWARDS</a>
-        
-              </div>
-              <div class="nav-search">
-                <form class="form-inline md-form form-md active-pink active-pink-2 mt-2" action="">
-                  <i class="fas fa-search" aria-hidden="true"></i>
-                  <input class="form-control form-control-md ml-3 w-75" type="text" placeholder="Search" aria-label="Search"
-                    name="users">
-                </form>
-              </div>
-              <div class="nav-right">
-                {% if user.is_authenticated %}
-                <a href="/logout">Logout</a>
-                {% else %}
-                <a href="/accounts/register">SignUp</a>
-                
-                <a class='btn btn-default' href="/accounts/login">Login</a>
-                
-                {%  endif %}
-                <a href="{% url 'profile' username=user %}" class="avatar">
-                  <img class="rounded-circle" alt="" src="{{user.profile.profile_photo.url}}" height="60" width="45" />
-                </a>
-                <a href="{% url 'post_project' %}" id="projects">SUBMIT PROJECT</a> 
-                
-                
-              </div>
-            </div>
-          </nav>
+  #brand {
+    color: black;
+    border: 2px solid #1565C0;
+    padding: 10px;
+    border-bottom: none;
+    font-size: 18px;
+  }
+
+  #brand:hover {
+    border-bottom: 2px solid #1565C0;
+    color: #64B5F6;
+  }
+
+  .accounts {
+    padding: 10px;
+    letter-spacing: 1.5px;
+    color: black;
+    font-weight: 700
+  }
+
+  .accounts:hover {
+    text-decoration: underline;
+  }
+
+  #projects {
+    padding: 20px;
+    background: #4DD0E1;
+    top: 0;
+    color: white;
+    font-weight: bold;
+  }
+
+  #projects:hover {
+    background: #81D4FA;
+  }
+</style>
+<nav style="background-color:white;" class="animated slideInDown navbar-collapse">
+  <div class="navbar mx-5">
+    <div id="logo">
+      <a href="{% url 'home' %}" id="brand"> AWWARDS</a>
+
+    </div>
+    <div class="nav-search">
+      <form class="form-inline md-form form-md active-pink active-pink-2 mt-2" action="">
+        <i class="fas fa-search" aria-hidden="true"></i>
+        <input class="form-control form-control-md ml-3 w-75" type="text" placeholder="Search" aria-label="Search"
+          name="users">
+      </form>
+    </div>
+    <div class="nav-right">
+      {% if user.is_authenticated %}
+      <a href="/logout">Logout</a>
+      <a class='btn btn-default' href="/accounts/login">Login</a>
+
+      <a href="/accounts/register">SignUp</a>
+
+
+      {% else %}
+
+      {%  endif %}
+      <a href="{% url 'profile' username=user %}" class="avatar">
+        <img class="rounded-circle" alt="" src="{{user.profile.profile_photo.url}}" height="60" width="45" />
+      </a>
+      <a href="{% url 'post_project' %}" id="projects">SUBMIT PROJECT</a>
+
+
+    </div>
+  </div>
+</nav>

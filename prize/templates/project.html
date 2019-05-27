@@ -8,7 +8,7 @@
             
             <div style="margin-left: 25%; margin-right: 25%;">
                 <div class="panel panel-default">
-                    <div class="panel-heading" style="font-family: 'Rajdhani', sans-serif;font-size: 20px"><a href=" {% url 'profile' username=user %} ">{{project.profile}}</a></div> 
+                    <div class="panel-heading" style="font-family: 'Rajdhani', sans-serif;font-size: 20px"><a href=" {% url 'profile' username=project.profile.username %} ">{{project.profile}}</a></div> 
                     <div class="panel-body">
                     <div class="panel-img-top" data-toggle="modal" data-target="#myModal{{project.id}}" height="100px" width="250px"  >
                         <img src="{{project.image_landing.url}}"alt="" height="400px" width="450px">

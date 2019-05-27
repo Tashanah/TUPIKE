@@ -53,7 +53,7 @@ def profile(request,username):
     
     projects = Projects.get_profile_projects(profile.id)
 
-    return render(request, 'user/profile.html', {"profile":profile,"profile_details": profile_details})
+    return render(request, 'user/profile.html', {"profile":profile,"profile_details": profile_details,"projects":projects})
 
 
 def search_results(request):
