@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'prize',
+    'tinymce',
+    'url_or_relative_url_field',
 ]
 
 MIDDLEWARE = [

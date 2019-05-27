@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 import datetime as dt
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from tinymce.models import HTMLField
+from url_or_relative_url_field.fields import URLOrRelativeURLField
+
 
 class Profile(models.Model):
     profile_photo=models.ImageField(upload_to='profiles/',default='download.jpeg')
@@ -20,7 +23,7 @@ class Projects(models.Model):
    pub_date = models.DateTimeField(auto_now_add=True)
 
 
-    @classmethod
+   @classmethod
    def get_profile_projects(cls,profile):
        projects = Projects.objects.filter(profile__pk=profile)
        print(projects)
@@ -37,7 +40,7 @@ class Projects(models.Model):
 
 class Comments(models.Model):
     comm = models.CharField(max_length = 100, blank = True)
-    image = models.ForeignKey(Image, related_name = "comments")
+    project = models.ForeignKey(Projects, related_name = "comments")
 
 
     def save_comment(self):
