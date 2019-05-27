@@ -22,6 +22,17 @@ class Profile(models.Model):
     def save_profile(sender,instance,**kwargs):
        instance.profile.save()
 
+    @classmethod
+    def filter_by_id(cls,id):
+        profile = Profile.objects.filter(user=id).first()
+        return profile
+
+    @classmethod
+    def get_by_id(cls,id):
+        profile=profile.objects.get(user=id)
+        return profile
+
+
 
 class Projects(models.Model):
    profile = models.ForeignKey(User,null=True,on_delete=models.CASCADE)
