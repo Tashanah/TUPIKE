@@ -3,5 +3,5 @@ from .models import Profile, Projects
 
 class MerchSerializer(serializers.ModelSerializer):
     class Meta:
-        model = MoringaMerch
-        fields = ('name', 'description', 'price')
+        model = Profile
+        fields = ('profile_photo', 'bio', 'profile_name', 'user')
