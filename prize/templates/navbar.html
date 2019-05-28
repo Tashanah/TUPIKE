@@ -38,7 +38,7 @@
 <nav style="background-color:white;" class="animated slideInDown navbar-collapse">
   <div class="navbar mx-5">
     <div id="logo">
-      <a href="{% url 'home' %}" id="brand"> AWWARDS</a>
+      <a href="{% url 'home' %}" id="brand"> AWARDS</a>
 
     </div>
     <div class="nav-search">
@@ -63,6 +63,8 @@
         <img class="rounded-circle" alt="" src="{{user.profile.profile_photo.url}}" height="60" width="45" />
       </a>
       <a href="{% url 'post_project' %}" id="projects">SUBMIT PROJECT</a>
+      <a href="{% url 'project_name' %}" id="projects">PROJECT</a>
+      <a href="{% url 'profile_name' %}" id="projects">PROFILE</a>
 
 
     </div>

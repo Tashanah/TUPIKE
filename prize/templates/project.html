@@ -15,6 +15,7 @@
                     </div>
                     <div class="panel-footer">
                         <p style="font-family: 'Rajdhani', sans-serif; color: black; font-size: 25px" >{{project.description}}</p>
+                         <a href="{{project.link.url}}">{{project.link}}</a>
                         {% for comment in comments %}
 
                         {{comment.user.username}}: {{comment.comm}}</p>
@@ -47,7 +48,10 @@
                             <img src="{{projects.image_landing.url}}" class="img-responsive" alt="project"> 
                         </div>
                         <div class="modal-footer">
-                            <p data-dismiss="modal" style="font-family: 'Rajdhani', sans-serif; color: black; font-size: 25px">{{project.caption}}</p>
+                            <p data-dismiss="modal" style="font-family: 'Rajdhani', sans-serif; color: black; font-size: 25px">{{project.description}}</p>
+                            <p><a href="{{project.link.url}}">{{project.link}}</a></p>
+
+                         
                         </div>
                         
                     </div>
