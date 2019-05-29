@@ -26,7 +26,7 @@
                             <div class="panel-img-top" data-toggle="modal" data-target="#myModal{{project.id}}" height="100px" width="250px"  >
                                <a href="{% url 'projects' project.pk %}"><img src="{{project.image_landing.url}}"alt="" height=200px width="300px"></a> 
                             </div>
-                           
+                            
                          
                             </div>
                             
@@ -50,7 +50,7 @@
                         </div>
                         <!-- <div class="modal-body">
                             <img src="{{projects.image_landing.url}}" class="img-responsive" alt="project"> 
-                        </div> -->
+                        </div>
                         <div class="modal-footer">
                             <p data-dismiss="modal" style="font-family: 'Rajdhani', sans-serif; color: black; font-size: 25px"> {{project.description}}
 
@@ -61,7 +61,7 @@
                         
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>    
     
     {% empty %}
@@ -74,3 +74,4 @@
 </div>
 </div>
 {% endblock %}
+
