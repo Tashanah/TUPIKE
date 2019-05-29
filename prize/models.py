@@ -5,6 +5,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from tinymce.models import HTMLField
 from url_or_relative_url_field.fields import URLOrRelativeURLField
+from django.core.validators import MaxValueValidator
 
 
 class Profile(models.Model):
@@ -41,6 +42,11 @@ class Projects(models.Model):
    description = HTMLField(max_length=200,blank=True)
    link = URLOrRelativeURLField(max_length=200)
    pub_date = models.DateTimeField(auto_now_add=True)
+   design = models.IntegerField(default=0)
+   usabilty = models.IntegerField(default=0)
+   content = models.IntegerField(default=0)
+    
+
 
 
    @classmethod
@@ -73,5 +79,12 @@ class Comments(models.Model):
         comm = Comments.objects.get(id = self.id)
         comm.comment = new_comment
         comm.save()
+
+class Ratings(models.Model):
+    design = models.PositiveIntegerField(default=0,validators=[MaxValueValidator(10)])
+    usabilty = models.PositiveIntegerField(default=0,validators=[MaxValueValidator(10)])
+    content = models.PositiveIntegerField(default=0,validators=[MaxValueValidator(10)])
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    project = models.IntegerField(default=0)
 
 

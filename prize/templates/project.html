@@ -2,38 +2,42 @@
 {% block content %}
 {{block.super}}
 
+<style>
+    body{
+        /* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSweUqGRT1wk_OPsrTghgEuUeG7B_qJ7ubDREzSrO1K14cPO2wK"); */
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: 100%;
+        opacity: 20%;
+    }
+</style>
+
 <div class="container">
         <div class="row">
-            {%  for project in projects %}
+                {%  for project in projects %}
+            <div class="col-md-4">
+
+                 
             
-            <div style="margin-left: 25%; margin-right: 25%;">
-                <div class="panel panel-default">
-                    <div class="panel-heading" style="font-family: 'Rajdhani', sans-serif;font-size: 20px"><a href=" {% url 'profile' username=project.profile.username %} ">{{project.profile}}</a></div> 
-                    <div class="panel-body">
-                    <div class="panel-img-top" data-toggle="modal" data-target="#myModal{{project.id}}" height="100px" width="250px"  >
-                        <img src="{{project.image_landing.url}}"alt="" height="400px" width="450px">
-                    </div>
-                    <div class="panel-footer">
-                        <p style="font-family: 'Rajdhani', sans-serif; color: black; font-size: 25px" >{{project.description}}</p>
-                         <a href="{{project.link.url}}">{{project.link}}</a>
-                        {% for comment in comments %}
-
-                        {{comment.user.username}}: {{comment.comm}}</p>
-              {% endfor %} 
-              
-              <input type="text" name="comment" id="" class="form-control comment-val" style="height: 30px;border-top-right-radius: 0; border-bottom-right-radius: 0"
-                required placeholder="Add a comment...">
-
-                <button type="submit" class="btn btn-sm btn-primary comment-btn" onclick="commenter('{project.id}}')"
-                style="height: 30px; border-top-left-radius: 0; border-bottom-left-radius: 0">Add</button>
-                
-                    </div>
-                    
-
-                </div>
-                </div>
+                    <div style="margin-left:10px ;margin-right: 10px">
+                        <!-- <div class="panel panel-default"> -->
+                            <div class="panel-heading" style="font-family: 'Rajdhani', sans-serif;font-size: 20px; color:black" ><a href=" {% url 'profile' username=project.profile.username %} ">Submitted by: {{project.profile}}</a></div> 
+                            <div class="panel-body">
+                            <div class="panel-img-top" data-toggle="modal" data-target="#myModal{{project.id}}" height="100px" width="250px"  >
+                               <a href="{% url 'projects' project.pk %}"><img src="{{project.image_landing.url}}"alt="" height=200px width="300px"></a> 
+                            </div>
+                           
+                         
+                            </div>
+                            
+        
+                        </div>
             </div>
             {% endfor %}
+           
+                </div>
+            </div>
+           
 
     {% for project in projects %}        
             <div id="myModal{{project.id}}" class="modal fade" role="dialog">
@@ -42,17 +46,18 @@
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                             <!-- <h4 class="modal-title">{{image.profile}}</h4> -->
-                            <a href=" {% url 'profile' username=user %} " style="font-family: 'Rajdhani', sans-serif;font-size: 20px">{{project.profile}}</a>
+                            <a href=" {% url 'profile' username=user %} " style="font-family: 'Rajdhani', sans-serif;font-size: 20px; text-align: center">{{project.profile}}</a>
                         </div>
-                        <div class="modal-body">
+                        <!-- <div class="modal-body">
                             <img src="{{projects.image_landing.url}}" class="img-responsive" alt="project"> 
-                        </div>
+                        </div> -->
                         <div class="modal-footer">
-                            <p data-dismiss="modal" style="font-family: 'Rajdhani', sans-serif; color: black; font-size: 25px">{{project.description}}</p>
-                            <p><a href="{{project.link.url}}">{{project.link}}</a></p>
+                            <p data-dismiss="modal" style="font-family: 'Rajdhani', sans-serif; color: black; font-size: 25px"> {{project.description}}
 
-                         
+                                                   
                         </div>
+                        <a href="{{project.link}}" target="_blank" style="font-family: 'Rajdhani', sans-serif;font-size: 20px;">SEE SITE</a> 
+
                         
                     </div>
                 </div>

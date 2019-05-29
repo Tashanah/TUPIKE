@@ -4,12 +4,13 @@ from django.contrib.auth.decorators import login_required
 import datetime as dt 
 from .models import *
 from django.contrib.auth.models import User
-from . forms import UserUploadProjects
+from . forms import UserUploadProjects,RatingsForms
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import  Projects,Profile
 from .serializer import ProjectsSerializer,ProfileSerializer
 from rest_framework import status
+
 
 @login_required(login_url='/accounts/login/')
 def home(request):
@@ -71,6 +72,85 @@ def search_results(request):
     else:
         message = "Invalid input"
         return render(request,'search.html',{"message":message})
+
+
+
+def projects(request,project_id):
+    try:
+         projects=Projects.objects.get(id=project_id)
+         all=Ratings.objects.filter(project=project_id)
+    except Exception as e:
+        raise Http404()
+
+
+    count=0
+    for i in all:
+        count+=i.usability
+        count+=i.design
+        count+=i.content
+
+    if count>0:
+        average=round(count/3,1)
+    else:
+        average=0
+
+    if request.method=='POST':
+        form=RatingsForms(request.POST)
+        if form.is_valid():
+            rate=form.save(commit=False)
+            rate.user=request.user
+            rate.project=project_id
+            rate.save()
+        return redirect('projects',project_id)
+    else:
+        form=RatingsForms()
+
+
+    votes=Ratings.objects.filter(project=project_id)
+    usability=[]
+    design=[]
+    content=[]
+
+    for i in votes:
+        usability.append(i.usability)
+        design.append(i.design)
+        content.append(i.content)
+
+    if len(usability)>0 or len(design)>0 or len(content)>0:
+        average_usability=round(sum(usability)/len(usability),1)     
+        average_design=round(sum(design)/len(design),1)     
+        average_content=round(sum(content)/len(content),1)     
+
+        average_rating=round((average_content+average_design+average_usability)/3,1)
+
+    else:
+        average_content=0.0
+        average_design=0.0
+        average_rating=0.0
+        average_usability=0.0
+
+    arr1=[]
+    for use in votes:
+        arr1.append(use.user_id)
+
+    auth=arr1
+
+        
+    return render(request,'singlepost.html',{
+        'projects':projects,
+        'form':form,
+        'usability':average_usability,
+        'design':average_design,
+        'content':average_content,
+        'average_rating':average_rating,
+        'auth':auth,
+        'all':all,
+        'average':average,
+      
+        }
+)
+
+
 
 class ProjectsList(APIView):
     def get(self, request, format=None):
