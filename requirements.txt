@@ -3,7 +3,7 @@ chardet==3.0.4
 cliapp==1.20170827
 Click==7.0
 cmdtest==0.32
-cryptography==2.1.4
+cryptography==3.2
 Django==1.11
 dominate==2.3.5
 enum34==1.1.6
